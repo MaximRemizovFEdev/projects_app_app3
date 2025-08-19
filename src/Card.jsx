@@ -22,9 +22,9 @@ export const Card = (props) => {
             <div>
                 <p><b>Статус</b></p>
                 <select name="select" onSelect={() => toChangeStatus()}>
-                    <option value="value1" selected={statusValue === "to do"}>to do</option>
-                    <option value="value2" selected={statusValue === "in progress"}>in progress</option>
-                    <option value="value3" selected={statusValue === "done"}>done</option>
+                    <option value="value1" defaultValue={statusValue === "to do"}>to do</option>
+                    <option value="value2" defaultValue={statusValue === "in progress"}>in progress</option>
+                    <option value="value3" defaultValue={statusValue === "done"}>done</option>
                 </select>
             </div>
         </div> 

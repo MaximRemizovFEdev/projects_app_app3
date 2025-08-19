@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const useCreateTask = () => {
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState(() => {
+        const savedCards = localStorage.getItem('taskCards');
+        return savedCards ? JSON.parse(savedCards) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem('taskCards', JSON.stringify(cards));
+    }, [cards]);
 
     const toAddCard = ({
         title,
@@ -18,11 +25,15 @@ export const useCreateTask = () => {
     }
 
     const toRemoveCard = (id) => {
-        setCards(cards.filter(el => (el.id === id)));
+        setCards(prevCards => prevCards.filter(el => el.id !== id));
     }
 
     const toChangeStatus = ({id, status}) => {
-
+        setCards(prevCards => 
+            prevCards.map(card => 
+                card.id === id ? { ...card, statusValue: status } : card
+            )
+        );
     }
 
     return {
