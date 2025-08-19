@@ -1,0 +1,3 @@
+Microfrontend
+
+remote приложение
